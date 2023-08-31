@@ -1,0 +1,22 @@
+version: "3.5"
+
+services:
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: emin
+      MINIO_ROOT_PASSWORD: eminemin
+    command: server --console-address ":9001" /data
+
+  artemis:
+    container_name: activeMQ
+    image: vromero/activemq-artemis
+    environment:
+      - ARTEMIS_USERNAME=emin
+      - ARTEMIS_PASSWORD=eminemin
+    ports:
+      - "8161:8161"
+      - "61616:61616"
